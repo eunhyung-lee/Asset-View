@@ -4,4 +4,13 @@ nodejs course
 2. nodejs 실행 방법 : json에 script수정, npm run win
 3. server
    terminal - npm install express
-   npm install << project 실행 시 필요한 module을 설치(package.json의 dependencies를 참고)
+   npm install << project 실행 시 필요한 module을 설치(package.json의 dependencies를 참고, package.json닫고 실행)
+   package-lock <<
+4. express
+   babeljs.io 설치 (자바스크립트 -> nodejs code)
+   npm install --save-dev @babel/core
+   Dependencies << project need
+   devDependencies << developer need
+5. nodemon 설치
+   code가 변경되는걸 감지해서 실행
+   npm install @babel/core @babel/node --save-dev
