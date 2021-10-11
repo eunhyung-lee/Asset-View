@@ -1,0 +1,22 @@
+{
+  "name": "wetube-clone",
+  "version": "1.0.0",
+  "description": "The best way to watch video",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "win": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eunhyung-lee/wetube-clone.git"
+  },
+  "author": "Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eunhyung-lee/wetube-clone/issues"
+  },
+  "homepage": "https://github.com/eunhyung-lee/wetube-clone#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
