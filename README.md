@@ -19,3 +19,4 @@ nodejs course
    2. git add .
    3. git commit -m "text"
    4. git push -u origin master
+7. change to asset view
