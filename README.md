@@ -14,3 +14,8 @@ nodejs course
 5. nodemon 설치
    code가 변경되는걸 감지해서 실행
    npm install @babel/core @babel/node --save-dev
+6. git 명령어
+   1. git status
+   2. git add .
+   3. git commit -m "text"
+   4. git push -u origin master

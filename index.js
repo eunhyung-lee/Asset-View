@@ -34,7 +34,7 @@ async function readFirstSheet() {
     // console.log(rows.length);
     // console.log(count);
     // count++;
-    console.log(ele._rawData[0], ele._rawData[1]);
+    console.log(ele._rawData[0], ele._rawData[1], ele._rawData[2]);
   });
   // console.log(doc.title);
   // console.log(doc.sheetsByIndex[0].title);
