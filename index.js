@@ -43,5 +43,3 @@ async function readFirstSheet() {
   console.log("data road end");
 }
 readFirstSheet();
-
-console.log("hi");
