@@ -45,6 +45,3 @@ async function readFirstSheet() {
 readFirstSheet();
 
 console.log("hi");
-console.log("hi");
-console.log("hi");
-console.log("hi");
