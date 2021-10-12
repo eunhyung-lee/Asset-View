@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/eunhyung-lee/wetube-clone#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "google-spreadsheet": "^3.1.15",
+    "googleapis": "^39.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
