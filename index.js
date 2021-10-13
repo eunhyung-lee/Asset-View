@@ -3,7 +3,6 @@ const gs_creds = require("./credentials.json");
 const doc = new GoogleSpreadsheet(
   "1uT0nKutfx6ogmquFBoyJzsqLQHKkluX42M3WUE5KwBQ"
 );
-const STOCK_COMPOSITE = "StockComposite";
 const ASSET_HISTORY = "AssetHistory";
 const ASSET_SUM = "AssetSum";
 const STOCK_LOCAL = "StockLocal";
@@ -26,10 +25,13 @@ async function readSheet() {
   console.log("data road start");
 
   await doc.loadInfo(); // loads document properties and worksheets
-  let stockSheet = doc.sheetsByTitle[STOCK_COMPOSITE];
-  let assetSheet = doc.sheetsByTitle[ASSET_HISTORY];
+  let assetSumSheet = doc.sheetsByTitle[ASSET_SUM];
+  let stockLocalSheet = doc.sheetsByTitle[STOCK_LOCAL];
+  let stockOverseaSheet = doc.sheetsByTitle[STOCK_OVERSEA];
+  let stockReitsSheet = doc.sheetsByTitle[REITS];
+  let cashSheet = doc.sheetsByTitle[CASH_THINGS];
 
-  let rows = await assetSheet.getRows({ offset: 0, limit: 4 });
+  let assetItems = await assetSumSheet.getRows({ offset: 0, limit: 4 });
   rows.forEach((ele) => {
     console.log(ele._rawData[0], ele._rawData[1], ele._rawData[2]);
   });
