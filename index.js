@@ -31,10 +31,21 @@ async function readSheet() {
   let stockReitsSheet = doc.sheetsByTitle[REITS];
   let cashSheet = doc.sheetsByTitle[CASH_THINGS];
 
-  let assetItems = await assetSumSheet.getRows({ offset: 0, limit: 4 });
-  rows.forEach((ele) => {
-    console.log(ele._rawData[0], ele._rawData[1], ele._rawData[2]);
-  });
+  let assetItems = await assetSumSheet.getRows({ offset: 0, limit: 2 });
+  // assetItems.forEach((ele) => {
+  //   console.log(
+  //     ele._rawData[0],
+  //     ele._rawData[1],
+  //     ele._rawData[2],
+  //     ele._rawData[3],
+  //     ele._rawData[4],
+  //     ele._rawData[5],
+  //     ele._rawData[6],
+  //     ele._rawData[7]
+  //   );
+  // });
+  console.log(assetItems);
+
   // const rows = await sheet.getRows();
   // console.log(rows.length);
   // console.log(rows[0].date);
