@@ -1,0 +1,19 @@
+#finance-main {
+  padding: 20px;
+  width: 80vw;
+  border: 1px solid black;
+}
+.piechart {
+  width: 500px;
+  height: 400px;
+}
+#chart-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.graphchart {
+  width: 1000px;
+  margin-bottom: 20px;
+}

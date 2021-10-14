@@ -1,0 +1,6 @@
+@import "finance.css";
+#finance-anchor {
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
+}
