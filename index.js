@@ -30,8 +30,17 @@ async function readSheet() {
   let stockOverseaSheet = doc.sheetsByTitle[STOCK_OVERSEA];
   let stockReitsSheet = doc.sheetsByTitle[REITS];
   let cashSheet = doc.sheetsByTitle[CASH_THINGS];
+  let assetItems = await assetSumSheet.getRows();
+  console.log(`국내주식 : ${assetItems[0].StockLocalSum}`);
+  console.log(`해외주식 : ${assetItems[0].StockOverseaSum}`);
+  console.log(`부동산(리츠) : ${assetItems[0].ReitsSum}`);
+  console.log(`현금성자산 : ${assetItems[0].CashThings}`);
+  console.log(`주택청약통장 : ${assetItems[0].ApartmentApplication}`);
+  console.log(`연금펀드 : ${assetItems[0].PensionFunds}`);
+  console.log(`차입금 : ${assetItems[0].debt}`);
+  console.log(`순자본 : ${assetItems[0].NetAsset}`);
+  console.log(`총자산 : ${assetItems[0].TotalAsset}`);
 
-  let assetItems = await assetSumSheet.getRows({ offset: 0, limit: 2 });
   // assetItems.forEach((ele) => {
   //   console.log(
   //     ele._rawData[0],
@@ -44,7 +53,7 @@ async function readSheet() {
   //     ele._rawData[7]
   //   );
   // });
-  console.log(assetItems);
+  // console.log(assetItems);
 
   // const rows = await sheet.getRows();
   // console.log(rows.length);
