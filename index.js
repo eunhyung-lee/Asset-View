@@ -11,18 +11,18 @@ const REITS = "Reits";
 const CASH_THINGS = "CashThings";
 
 async function authGoogleSheet() {
-  console.log("auth start");
+  // console.log("auth start");
   try {
     await doc.useServiceAccountAuth(gs_creds);
   } catch (err) {
     console.log("AUTH ERROR", err);
   }
-  console.log("auth end");
+  // console.log("auth end");
 }
 authGoogleSheet();
 
 async function readSheet() {
-  console.log("data road start");
+  // console.log("data road start");
 
   await doc.loadInfo(); // loads document properties and worksheets
   let assetSumSheet = doc.sheetsByTitle[ASSET_SUM];
@@ -30,17 +30,27 @@ async function readSheet() {
   let stockOverseaSheet = doc.sheetsByTitle[STOCK_OVERSEA];
   let stockReitsSheet = doc.sheetsByTitle[REITS];
   let cashSheet = doc.sheetsByTitle[CASH_THINGS];
-  let assetItems = await assetSumSheet.getRows();
-  console.log(`국내주식 : ${assetItems[0].StockLocalSum}`);
-  console.log(`해외주식 : ${assetItems[0].StockOverseaSum}`);
-  console.log(`부동산(리츠) : ${assetItems[0].ReitsSum}`);
-  console.log(`현금성자산 : ${assetItems[0].CashThings}`);
-  console.log(`주택청약통장 : ${assetItems[0].ApartmentApplication}`);
-  console.log(`연금펀드 : ${assetItems[0].PensionFunds}`);
-  console.log(`차입금 : ${assetItems[0].debt}`);
-  console.log(`순자본 : ${assetItems[0].NetAsset}`);
-  console.log(`총자산 : ${assetItems[0].TotalAsset}`);
+  let assetItemRows = await assetSumSheet.getRows();
+  let stockLocalRows = await stockLocalSheet.getRows();
+  let stockOverseaRows = await stockOverseaSheet.getRows();
+  let exchangeRate = parseFloat(assetItemRows[0].ExchangeRate);
+  console.log(`국내주식 : ${assetItemRows[0].StockLocalSum}`);
+  console.log(`해외주식 : ${assetItemRows[0].StockOverseaSum}`);
+  console.log(`부동산(리츠) : ${assetItemRows[0].ReitsSum}`);
+  console.log(`현금성자산 : ${assetItemRows[0].CashThings}`);
+  console.log(`주택청약통장 : ${assetItemRows[0].ApartmentApplication}`);
+  console.log(`연금펀드 : ${assetItemRows[0].PensionFunds}`);
+  console.log(`차입금 : ${assetItemRows[0].debt}`);
+  console.log(`순자본 : ${assetItemRows[0].NetAsset}`);
+  console.log(`총자산 : ${assetItemRows[0].TotalAsset}`);
+  stockLocalRows.forEach((ele) => {
+    console.log(`${ele.Item} : ${parseFloat(ele.PriceTotal)}`);
+  });
+  stockOverseaRows.forEach((ele) => {
+    console.log(`${ele.Item} : ${parseFloat(ele.PriceTotal) * exchangeRate}`);
+  });
 
+  // * parseFloat(exchangeRate)
   // assetItems.forEach((ele) => {
   //   console.log(
   //     ele._rawData[0],
@@ -66,7 +76,7 @@ async function readSheet() {
   // console.log(doc.title);
   // console.log(doc.sheetsByIndex[0].title);
   // console.log(doc.sheetsByIndex[0].rowCount);
-  console.log("data road end");
+  // console.log("data road end");
 }
 readSheet();
-console.log("program end");
+// console.log("program e?nd");
