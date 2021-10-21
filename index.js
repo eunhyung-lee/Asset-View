@@ -1,5 +1,8 @@
-const { GoogleSpreadsheet } = require("google-spreadsheet");
-const gs_creds = require("./credentials.json");
+// const { GoogleSpreadsheet } = require("google-spreadsheet");
+import { GoogleSpreadsheet } from "google-spreadsheet";
+// const gs_creds = require("./credentials.json");
+
+import gs_creds from "./credentials.json";
 const doc = new GoogleSpreadsheet(
   "1uT0nKutfx6ogmquFBoyJzsqLQHKkluX42M3WUE5KwBQ"
 );
@@ -9,6 +12,8 @@ const STOCK_LOCAL = "StockLocal";
 const STOCK_OVERSEA = "StockOversea";
 const REITS = "Reits";
 const CASH_THINGS = "CashThings";
+
+let test = 0;
 
 async function authGoogleSheet() {
   // console.log("auth start");
@@ -33,7 +38,9 @@ async function readSheet() {
   let assetItemRows = await assetSumSheet.getRows();
   let stockLocalRows = await stockLocalSheet.getRows();
   let stockOverseaRows = await stockOverseaSheet.getRows();
-  let exchangeRate = parseFloat(assetItemRows[0].ExchangeRate);
+  const exchangeRate = parseFloat(assetItemRows[0].ExchangeRate);
+  test = parseFloat(exchangeRate);
+  console.log(test);
   console.log(`국내주식 : ${assetItemRows[0].StockLocalSum}`);
   console.log(`해외주식 : ${assetItemRows[0].StockOverseaSum}`);
   console.log(`부동산(리츠) : ${assetItemRows[0].ReitsSum}`);
@@ -79,4 +86,4 @@ async function readSheet() {
   // console.log("data road end");
 }
 readSheet();
-// console.log("program e?nd");
+export default test;

@@ -2,6 +2,9 @@
 //google chart 붙여넣기
 //google chart 붙여넣기
 //google chart 붙여넣기
+
+// import { GoogleSpreadsheet } from "google-spreadsheet";
+
 google.charts.load("current", { packages: ["corechart", "table"] });
 // google.charts.setOnLoadCallback(drawChart);
 
@@ -156,3 +159,5 @@ function drawTotalAsset() {
   );
   totalAssetChart.draw(totalAssetData, totalAssetOptions);
 }
+
+// console.log(test);
