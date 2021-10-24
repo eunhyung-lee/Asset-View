@@ -4,7 +4,8 @@
   "description": "The best way to watch video",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -L --exec babel-node index.js"
+    "asset": "nodemon -L --exec babel-node src/index.js",
+    "server": "nodemon -L --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,9 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "google-spreadsheet": "^3.1.15",
-    "googleapis": "^39.2.0"
+    "googleapis": "^39.2.0",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

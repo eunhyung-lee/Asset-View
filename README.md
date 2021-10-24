@@ -20,3 +20,5 @@ nodejs course
    3. git commit -m "text"
    4. git push -u origin master
 7. change to asset view
+8. url
+   home/asset
