@@ -1,18 +1,10 @@
-//google chart 붙여넣기
-//google chart 붙여넣기
-//google chart 붙여넣기
-//google chart 붙여넣기
-
-// import { GoogleSpreadsheet } from "google-spreadsheet";
-
+<script>
 google.charts.load("current", { packages: ["corechart", "table"] });
 // google.charts.setOnLoadCallback(drawChart);
-
 google.charts.setOnLoadCallback(drawStockComposition);
-google.charts.setOnLoadCallback(drawAssetComposition);
-google.charts.setOnLoadCallback(drawInvestmentIncome);
-google.charts.setOnLoadCallback(drawTotalAsset);
-
+// google.charts.setOnLoadCallback(drawAssetComposition);
+// google.charts.setOnLoadCallback(drawInvestmentIncome);
+// google.charts.setOnLoadCallback(drawTotalAsset);
 let stockData; // 주식 구성 변수
 let stockOptions;
 let stockChart;
@@ -160,4 +152,5 @@ function drawTotalAsset() {
   totalAssetChart.draw(totalAssetData, totalAssetOptions);
 }
 
-// console.log(test);
+console.log("test");
+</script>

@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "asset": "nodemon -L --exec babel-node src/index.js",
-    "server": "nodemon -L --exec babel-node src/server.js"
+    "dev": "nodemon -L --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",

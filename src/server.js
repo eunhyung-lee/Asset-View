@@ -16,10 +16,10 @@ const STOCK_LOCAL = "StockLocal";
 const STOCK_OVERSEA = "StockOversea";
 const REITS = "Reits";
 const CASH_THINGS = "CashThings";
-let exchangeRate;
-let totalAsset;
-let netAsset;
-let debt;
+export let exchangeRate;
+export let totalAsset;
+export let netAsset;
+export let debt;
 async function authGoogleSheet() {
   try {
     await doc.useServiceAccountAuth(gs_creds);

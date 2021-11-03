@@ -2,12 +2,16 @@ doctype html
 html(lang="ko")
     head   
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
-        title MyAsset
+        script(src="https://www.gstatic.com/charts/loader.js")
+        include ../financial.js
+        title MyAsset   
 
     body
         header
             h1 Asset
-        main 
+        main#finance-main
+            div#chart-box 
+                div#stock-chart.piechart   
             h5 Exchange rate is #{exchangeRate}
             h5 Total Asset is #{totalAsset}
             h5 Net Asset is #{netAsset}
