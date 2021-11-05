@@ -1,6 +1,14 @@
+import {
+  exchangeRate,
+  totalAsset,
+  netAsset,
+  debt,
+  stockLocal,
+} from "../server";
+
 export const home = (req, res) => {
-  return res.send("home");
+  return res.render("home");
 };
-export const viewAsset = (req, res) => {
-  res.render("asset");
+export const handleAsset = (req, res) => {
+  res.render("asset", { exchangeRate, totalAsset, netAsset, debt, stockLocal });
 };

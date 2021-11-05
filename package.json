@@ -22,6 +22,7 @@
     "express": "^4.17.1",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^39.2.0",
+    "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
   },

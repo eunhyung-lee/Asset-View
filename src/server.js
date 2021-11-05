@@ -3,10 +3,10 @@ import morgan from "morgan"; //morgan 불러오기
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import gs_creds from "../credentials.json";
 import globalRouter from "./routers/globalRouter.js";
+import "./db";
 const PORT = 5500;
 const app = express(); //create express application
 const logger = morgan("dev");
-
 const doc = new GoogleSpreadsheet(
   "1uT0nKutfx6ogmquFBoyJzsqLQHKkluX42M3WUE5KwBQ"
 );
@@ -16,11 +16,11 @@ const STOCK_LOCAL = "StockLocal";
 const STOCK_OVERSEA = "StockOversea";
 const REITS = "Reits";
 const CASH_THINGS = "CashThings";
-let exchangeRate;
-let totalAsset;
-let netAsset;
-let debt;
-let stockLocal = [];
+export let exchangeRate;
+export let totalAsset;
+export let netAsset;
+export let debt;
+export let stockLocal = [];
 async function authGoogleSheet() {
   try {
     await doc.useServiceAccountAuth(gs_creds);
@@ -58,12 +58,7 @@ app.set("view engine", "pug"); // view engine을 pug로 설정
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 
-app.use("/", globalRouter);
-
-const handleAsset = (req, res) => {
-  res.render("asset", { exchangeRate, totalAsset, netAsset, debt, stockLocal });
-};
-app.get("/asset", handleAsset);
+app.use("/", globalRouter); //global router home,asset
 
 const handleListening = () => {
   console.log(`Server listening on port http://localhost:${PORT}`);
