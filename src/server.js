@@ -16,10 +16,11 @@ const STOCK_LOCAL = "StockLocal";
 const STOCK_OVERSEA = "StockOversea";
 const REITS = "Reits";
 const CASH_THINGS = "CashThings";
-export let exchangeRate;
-export let totalAsset;
-export let netAsset;
-export let debt;
+let exchangeRate;
+let totalAsset;
+let netAsset;
+let debt;
+let stockLocal = [];
 async function authGoogleSheet() {
   try {
     await doc.useServiceAccountAuth(gs_creds);
@@ -41,27 +42,15 @@ async function readSheet() {
   let assetItemRows = await assetSumSheet.getRows(); //await
   let stockLocalRows = await stockLocalSheet.getRows(); //await
   let stockOverseaRows = await stockOverseaSheet.getRows(); //await
-  //   const exchangeRate = parseFloat(assetItemRows[0].ExchangeRate);
   exchangeRate = parseFloat(assetItemRows[0].ExchangeRate);
   totalAsset = assetItemRows[0].TotalAsset;
   netAsset = assetItemRows[0].NetAsset;
   debt = assetItemRows[0].debt;
-  //   console.log(`환율 : ${parseFloat(exchangeRate)}`);
-  //   console.log(`국내주식 : ${assetItemRows[0].StockLocalSum}`);
-  //   console.log(`해외주식 : ${assetItemRows[0].StockOverseaSum}`);
-  //   console.log(`부동산(리츠) : ${assetItemRows[0].ReitsSum}`);
-  //   console.log(`현금성자산 : ${assetItemRows[0].CashThings}`);
-  //   console.log(`주택청약통장 : ${assetItemRows[0].ApartmentApplication}`);
-  //   console.log(`연금펀드 : ${assetItemRows[0].PensionFunds}`);
-  //   console.log(`차입금 : ${assetItemRows[0].debt}`);
-  //   console.log(`순자본 : ${assetItemRows[0].NetAsset}`);
-  //   console.log(`총자산 : ${assetItemRows[0].TotalAsset}`);
-  //   stockLocalRows.forEach((ele) => {
-  //     console.log(`${ele.Item} : ${parseFloat(ele.PriceTotal)}`);
-  //   });
-  //   stockOverseaRows.forEach((ele) => {
-  //     console.log(`${ele.Item} : ${parseFloat(ele.PriceTotal) * exchangeRate}`);
-  //   });
+  stockLocal.push(stockLocalRows[0].PriceTotal);
+  stockLocal.push(stockLocalRows[1].PriceTotal);
+  stockLocal.push(stockLocalRows[2].PriceTotal);
+  stockLocal.push(stockLocalRows[3].PriceTotal);
+  stockLocal.push(parseFloat(stockOverseaRows[0].PriceTotal) * exchangeRate);
 }
 readSheet();
 
@@ -72,7 +61,7 @@ app.use(logger);
 app.use("/", globalRouter);
 
 const handleAsset = (req, res) => {
-  res.render("asset", { exchangeRate, totalAsset, netAsset, debt });
+  res.render("asset", { exchangeRate, totalAsset, netAsset, debt, stockLocal });
 };
 app.get("/asset", handleAsset);
 

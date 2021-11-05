@@ -7,7 +7,6 @@ google.charts.setOnLoadCallback(drawStockComposition);
 let stockData; // 주식 구성 변수
 let stockOptions;
 let stockChart;
-console.log(exchangeRate);
 function drawStockComposition() {
   stockData = new google.visualization.DataTable();
   stockData.addColumn("string", "stock");
@@ -151,3 +150,5 @@ function drawTotalAsset() {
   );
   totalAssetChart.draw(totalAssetData, totalAssetOptions);
 }
+
+console.log("test");
