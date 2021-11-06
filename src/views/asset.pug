@@ -12,6 +12,8 @@ html(lang="ko")
         main#finance-main
             div#chart-box 
                 div#stock-chart.piechart   
+            form(method="POST")
+                input(type="submit",value="update")
             h5 Exchange rate is #{exchangeRate}
             h5 Total Asset is #{totalAsset}
             h5 Net Asset is #{netAsset}

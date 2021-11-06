@@ -4,11 +4,29 @@ import {
   netAsset,
   debt,
   stockLocal,
-} from "../server";
+} from "../googleSheet";
+import { authGoogleSheet, readSheet } from "../googleSheet";
 
 export const home = (req, res) => {
   return res.render("home");
 };
-export const handleAsset = (req, res) => {
-  res.render("asset", { exchangeRate, totalAsset, netAsset, debt, stockLocal });
+export const handleGetAsset = async (req, res) => {
+  await readSheet();
+  return res.render("asset", {
+    exchangeRate,
+    totalAsset,
+    netAsset,
+    debt,
+    stockLocal,
+  });
+};
+export const handlePostAsset = async (req, res) => {
+  await readSheet();
+  return res.render("asset", {
+    exchangeRate,
+    totalAsset,
+    netAsset,
+    debt,
+    stockLocal,
+  });
 };
