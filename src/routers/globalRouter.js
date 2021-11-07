@@ -3,9 +3,12 @@ import {
   home,
   handleGetAsset,
   handlePostAsset,
+  handleGetUserAdd,
+  handlePostUserAdd,
 } from "../controllers/homeController";
 const globalRouter = express.Router();
 globalRouter.get("/", home);
 globalRouter.route("/asset").get(handleGetAsset).post(handlePostAsset);
+globalRouter.route("/useradd").get(handleGetUserAdd).post(handlePostUserAdd);
 
 export default globalRouter;

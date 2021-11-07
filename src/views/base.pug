@@ -1,0 +1,19 @@
+doctype html 
+html(lang="ko")
+    head   
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+        script(src="https://www.gstatic.com/charts/loader.js")
+        title #{pageTitle} | Asset
+    body
+        header
+            h1=pageTitle
+        nav 
+            ul             
+                li 
+                    a(href="/useradd") Add User
+                li 
+                    a(href="/") Go to home
+        main
+            block content
+        block script
+        include ./partial/footer

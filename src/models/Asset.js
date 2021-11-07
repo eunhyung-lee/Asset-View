@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const assetSchema = new mongoose.Schema({
   name: { type: String },
   stockLocalSum: { type: Number },
-  stockOverseaSumb: { type: Number },
+  stockOverseaSum: { type: Number },
   reitsSum: { type: Number },
   cashSum: { type: Number },
   debt: { type: Number },
@@ -44,6 +44,7 @@ const assetSchema = new mongoose.Schema({
       publicOffering: { type: Number },
     },
     pensionFund: { type: Number },
-    apartmentDeposit: { type: Number },
+    apartmentApplication: { type: Number },
   },
+  debt: { type: Number },
 });

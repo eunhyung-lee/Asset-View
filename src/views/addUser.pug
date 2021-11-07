@@ -1,0 +1,23 @@
+extends base
+
+block content 
+    form(method="POST")
+        h3 국내주식
+        input(name="stockLoca1",placeholder="stockLoca1", required, type="text")
+        input(name="stockLoca2",placeholder="stockLoca2", required, type="text")
+        input(name="stockLoca3",placeholder="stockLoca3", required, type="text")
+        input(name="stockLoca4",placeholder="stockLoca4", required, type="text")
+        h3 해외주식
+        input(name="stockOversea1",placeholder="stockOversea1", required, type="text")
+        h3 리츠
+        input(name="reits1",placeholder="reits1", required, type="text")
+        input(name="reits2",placeholder="reits2", required, type="text")
+        h3 기타
+        input(name="defi",placeholder="defi", required, type="text")
+        input(name="deposit1",placeholder="deposit1", required, type="text")
+        input(name="deposit2",placeholder="deposit2", required, type="text")
+        input(name="publicOffering",placeholder="publicOffering", required, type="text")
+        input(name="apartmentApplication",placeholder="apartmentApplication", required, type="text")
+        input(name="pensionFund",placeholder="pensionFund", required, type="text")
+        input(name="debt",placeholder="debt", required, type="text")
+        input(type="Submit", value="make your Profile")
