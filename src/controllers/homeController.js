@@ -14,6 +14,7 @@ export const handleGetUserAdd = (req, res) => {
   return res.render("addUser", { pageTitle: "Make Profile" });
 };
 export const handlePostUserAdd = (req, res) => {
+  console.log(req.body);
   return res.send("PostAdd");
 };
 export const handleGetAsset = async (req, res) => {

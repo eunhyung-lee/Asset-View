@@ -1,23 +1,40 @@
 extends base
 
 block content 
-    form(method="POST")
-        h3 국내주식
-        input(name="stockLoca1",placeholder="stockLoca1", required, type="text")
-        input(name="stockLoca2",placeholder="stockLoca2", required, type="text")
-        input(name="stockLoca3",placeholder="stockLoca3", required, type="text")
-        input(name="stockLoca4",placeholder="stockLoca4", required, type="text")
+    form(method="POST", id="total-form")
+        h3 국내주식 
+        div(id="local-box")
+            label krx
+                input(name="market1", type="radio",value="krx")
+            label kosdaq
+                input(name="market1", type="radio",value="kosdaq")
+            input(name="LocalName1",placeholder="input name", type="text")            
+            input(name="Localticker1",placeholder="input ticker", type="text")
+            input(name="Localamount1",placeholder="input amount", type="text")
+            input(id="add-local-stock",type="button", value="add Local Stock")
+
+            
+        //- input(name="stockLoca2",placeholder="stockLoca2", type="text")
+        //- input(name="stockLoca3",placeholder="stockLoca3", type="text")
+        //- input(name="stockLoca4",placeholder="stockLoca4", type="text")
         h3 해외주식
-        input(name="stockOversea1",placeholder="stockOversea1", required, type="text")
+        input(name="stockOversea1",placeholder="stockOversea1", type="text")
         h3 리츠
-        input(name="reits1",placeholder="reits1", required, type="text")
-        input(name="reits2",placeholder="reits2", required, type="text")
+        input(name="reits1",placeholder="reits1", type="text")
+        input(name="reits2",placeholder="reits2", type="text")
         h3 기타
-        input(name="defi",placeholder="defi", required, type="text")
-        input(name="deposit1",placeholder="deposit1", required, type="text")
-        input(name="deposit2",placeholder="deposit2", required, type="text")
-        input(name="publicOffering",placeholder="publicOffering", required, type="text")
-        input(name="apartmentApplication",placeholder="apartmentApplication", required, type="text")
-        input(name="pensionFund",placeholder="pensionFund", required, type="text")
-        input(name="debt",placeholder="debt", required, type="text")
+        input(name="defi",placeholder="defi", type="text")
+        input(name="deposit1",placeholder="deposit1", type="text")
+        input(name="deposit2",placeholder="deposit2", type="text")
+        input(name="publicOffering",placeholder="publicOffering", type="text")
+        input(name="apartmentApplication",placeholder="apartmentApplication", type="text")
+        input(name="pensionFund",placeholder="pensionFund", type="text")
+        input(name="debt",placeholder="debt", type="text")
         input(type="Submit", value="make your Profile")
+block script 
+    script
+        include adduserjs.js
+    //- script.
+    //-     const addLocalStockButton = document.querySelector("#add-local-stock");
+    //-     addLocalStockButton.addEventListener("click",addLocalStock);
+    //-     function addLocalStock(event){console.log("yes")}
