@@ -8,6 +8,7 @@ import {
 } from "../controllers/homeController.js";
 const globalRouter = express.Router();
 globalRouter.get("/", home);
+globalRouter.get("/:id([0-9a-f]{24})", handleGetAsset);
 globalRouter.route("/asset").get(handleGetAsset).post(handlePostAsset);
 globalRouter.route("/useradd").get(handleGetUserAdd).post(handlePostUserAdd);
 

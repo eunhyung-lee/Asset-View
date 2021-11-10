@@ -2,34 +2,23 @@ extends base
 
 block content 
     form(method="POST", id="total-form")
+        input(name="userName",type="text",placeholder="당신의 이름 입력")
         h3 국내주식 
-        div(id="local-box")
-            label krx
-                input(name="market1", type="radio",value="krx")
-            label kosdaq
-                input(name="market1", type="radio",value="kosdaq")
-            input(name="LocalName1",placeholder="input name", type="text")            
-            input(name="Localticker1",placeholder="input ticker", type="text")
-            input(name="Localamount1",placeholder="input amount", type="text")
+        div(id="local-box", style="border:solid; padding:20px") 국내주식
             input(id="add-local-stock",type="button", value="add Local Stock")
-
-            
-        //- input(name="stockLoca2",placeholder="stockLoca2", type="text")
-        //- input(name="stockLoca3",placeholder="stockLoca3", type="text")
-        //- input(name="stockLoca4",placeholder="stockLoca4", type="text")
-        h3 해외주식
-        input(name="stockOversea1",placeholder="stockOversea1", type="text")
-        h3 리츠
-        input(name="reits1",placeholder="reits1", type="text")
-        input(name="reits2",placeholder="reits2", type="text")
-        h3 기타
-        input(name="defi",placeholder="defi", type="text")
-        input(name="deposit1",placeholder="deposit1", type="text")
-        input(name="deposit2",placeholder="deposit2", type="text")
-        input(name="publicOffering",placeholder="publicOffering", type="text")
-        input(name="apartmentApplication",placeholder="apartmentApplication", type="text")
-        input(name="pensionFund",placeholder="pensionFund", type="text")
-        input(name="debt",placeholder="debt", type="text")
+        //- h3 해외주식
+        //- input(name="stockOversea1",placeholder="stockOversea1", type="text")
+        //- h3 리츠
+        //- input(name="reits1",placeholder="reits1", type="text")
+        //- input(name="reits2",placeholder="reits2", type="text")
+        //- h3 기타
+        //- input(name="defi",placeholder="defi", type="text")
+        //- input(name="deposit1",placeholder="deposit1", type="text")
+        //- input(name="deposit2",placeholder="deposit2", type="text")
+        //- input(name="publicOffering",placeholder="publicOffering", type="text")
+        //- input(name="apartmentApplication",placeholder="apartmentApplication", type="text")
+        //- input(name="pensionFund",placeholder="pensionFund", type="text")
+        //- input(name="debt",placeholder="debt", type="text")
         input(type="Submit", value="make your Profile")
 block script 
     script

@@ -1,4 +1,8 @@
 extends base.pug
+include mixins/user
 
 block content
-    a(href="/asset") go to asset
+    each info in users
+        +user(info)
+    else
+        li No one like my page 
