@@ -47,4 +47,16 @@ export async function readSheet() {
   stockLocal.push(parseFloat(stockOverseaRows[0].PriceTotal) * exchangeRate);
   console.log("update success");
 }
+
+export async function getPrice(stockInfo) {
+  await doc.loadInfo();
+  let stockLocalSheet = doc.sheetsByTitle[STOCK_LOCAL];
+  const rows = await stockLocalSheet.getRows();
+  rows[4].market = stockInfo.market;
+  rows[4].ticker = stockInfo.ticker;
+  rows[4].NumberOf = stockInfo.amount;
+  await rows[4].save();
+  console.log(rows[4].PriceEach);
+  // stockInfo.item
+}
 // readSheet();

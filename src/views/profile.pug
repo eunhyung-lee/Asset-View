@@ -1,0 +1,6 @@
+//- user profile
+extends base
+
+block content 
+    each stock in user.localStock 
+        h4 #{stock.item}  #{stock.amount} 주

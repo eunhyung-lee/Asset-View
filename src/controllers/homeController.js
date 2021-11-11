@@ -5,6 +5,7 @@ import {
   debt,
   stockLocal,
   readSheet,
+  getPrice,
 } from "../googleSheet";
 import User from "../models/Asset.js";
 
@@ -13,7 +14,7 @@ export const home = async (req, res) => {
     const users = await User.find({});
     return res.render("home", { pageTitle: "User List", users });
   } catch {
-    return res.send("server-error");
+    return res.render("404", { pageTitle: "Error" });
   }
 };
 
@@ -44,7 +45,7 @@ export const handlePostUserAdd = async (req, res) => {
 
   const user = new User({
     name: userName,
-    stock: localStocks,
+    localStock: localStocks,
   });
   try {
     await user.save(); // database에 저장
@@ -84,4 +85,16 @@ export const handlePostAsset = async (req, res) => {
     debt,
     stockLocal,
   });
+};
+
+export const userAsset = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.render("404", { pageTitle: "Error" });
+  }
+  user.localStock[0].price = 3000;
+  console.log(user);
+  getPrice(user.localStock[0]);
+  return res.render("profile", { pageTitle: "profile", user });
 };

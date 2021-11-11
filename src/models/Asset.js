@@ -6,6 +6,7 @@ const stockschema = new mongoose.Schema({
   item: String,
   ticker: Number,
   amount: Number,
+  price: Number,
 });
 const assetSchema = new mongoose.Schema({
   name: { type: String },
@@ -16,7 +17,7 @@ const assetSchema = new mongoose.Schema({
   // debt: { type: Number },
   // netAsset: { type: Number },
   // totalAsset: { type: Number },
-  stock: [stockschema],
+  localStock: [stockschema],
   // local: [{ type: Object }],
   // {
   //   market: String,
