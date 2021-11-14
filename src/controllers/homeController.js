@@ -7,7 +7,7 @@ import {
   readSheet,
   getPrice,
 } from "../googleSheet";
-import User from "../models/Asset.js";
+import User, { Stock } from "../models/Asset.js";
 
 export const home = async (req, res) => {
   try {
@@ -29,9 +29,10 @@ export const handleGetUserAdd = (req, res) => {
 };
 export const handlePostUserAdd = async (req, res) => {
   let localStockCount = 1;
-  const localStocks = [];
+  let localStocks = [];
   const { userName } = req.body;
 
+  //주식 정보 array로 저장
   while (req.body[`LocalName${localStockCount}`]) {
     // localStocks[localStockCount - 1] = {
     localStocks.push({
@@ -42,7 +43,9 @@ export const handlePostUserAdd = async (req, res) => {
     });
     localStockCount++;
   }
+  localStocks = await getPrice(localStocks);
 
+  //db에 저장할 user schema 생성
   const user = new User({
     name: userName,
     localStock: localStocks,
@@ -87,14 +90,56 @@ export const handlePostAsset = async (req, res) => {
   });
 };
 
-export const userAsset = async (req, res) => {
+//user profile page GET, POST
+export const getUserAsset = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
   if (!user) {
     return res.render("404", { pageTitle: "Error" });
   }
-  user.localStock[0].price = 3000;
-  console.log(user);
-  getPrice(user.localStock[0]);
-  return res.render("profile", { pageTitle: "profile", user });
+  return res.render("profile", { pageTitle: "Profile", user });
+};
+export const postUserAsset = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    //error 처리
+    return res.render("404", { pageTitle: "Error" });
+  }
+  if (req.body.update) {
+    //refresh click시
+    let updatedStock = [];
+    updatedStock = await getPrice(user.localStock);
+    await User.findByIdAndUpdate(id, { localStock: updatedStock });
+    return res.redirect(`/${id}`);
+  } else if (req.body.deleteLocalStock) {
+    const stockItem = req.body.deleteLocalStock.split(" ")[1];
+    let nth;
+    const stockForDelete = user.localStock.find((ele, index) => {
+      if (ele.item === stockItem) {
+        nth = index;
+        return true;
+      }
+    });
+    //하나 제거
+    const newStockArr = user.localStock.splice(nth, 1);
+    await User.findByIdAndUpdate(id, {
+      localStock: user.localStock,
+    });
+
+    return res.redirect(`/${id}`);
+  }
+};
+
+export const userDelete = async (req, res) => {
+  //delete button click시
+  const { id } = req.params;
+  console.log(id);
+  const user = await User.findById(id);
+  if (!user) {
+    //error 처리
+    return res.render("404", { pageTitle: "Error" });
+  }
+  await User.findByIdAndDelete(id);
+  return res.redirect("/");
 };

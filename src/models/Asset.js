@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
 //asset schema
-const stockschema = new mongoose.Schema({
+const stockSchema = new mongoose.Schema({
   market: String,
   item: String,
-  ticker: Number,
+  ticker: String,
   amount: Number,
-  price: Number,
+  price: { type: Number, default: -1 },
+  updated: { type: Date, required: true, default: Date.now },
 });
 const assetSchema = new mongoose.Schema({
   name: { type: String },
@@ -17,7 +18,7 @@ const assetSchema = new mongoose.Schema({
   // debt: { type: Number },
   // netAsset: { type: Number },
   // totalAsset: { type: Number },
-  localStock: [stockschema],
+  localStock: [stockSchema],
   // local: [{ type: Object }],
   // {
   //   market: String,
@@ -57,5 +58,5 @@ const assetSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", assetSchema);
-
+export const Stock = mongoose.model("Stock", stockSchema);
 export default User;

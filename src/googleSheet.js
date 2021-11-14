@@ -48,15 +48,39 @@ export async function readSheet() {
   console.log("update success");
 }
 
-export async function getPrice(stockInfo) {
+export async function getPrice(stocks) {
   await doc.loadInfo();
   let stockLocalSheet = doc.sheetsByTitle[STOCK_LOCAL];
-  const rows = await stockLocalSheet.getRows();
-  rows[4].market = stockInfo.market;
-  rows[4].ticker = stockInfo.ticker;
-  rows[4].NumberOf = stockInfo.amount;
-  await rows[4].save();
-  console.log(rows[4].PriceEach);
-  // stockInfo.item
+  let rows = await stockLocalSheet.getRows();
+  let count;
+  let stockIndex;
+  let savedStocks = rows.length;
+  let stockRowNum = rows.length;
+
+  for (stockIndex = 0; stockIndex < stocks.length; stockIndex++) {
+    for (count = 0; count < rows.length; count++) {
+      if (rows[count].Item === stocks[stockIndex].item) {
+        stocks[stockIndex].price = rows[count].PriceEach;
+        break;
+      }
+    }
+    if (count === rows.length) {
+      const newRow = await stockLocalSheet.addRow({
+        market: stocks[stockIndex].market,
+        Item: stocks[stockIndex].item,
+        ticker: stocks[stockIndex].ticker,
+        NumberOf: stocks[stockIndex].amount,
+        PriceEach: `=IFERROR(GOOGLEFINANCE(concatenate(A${
+          rows.length + 2
+        },":",C${rows.length + 2}),"price"),"-1")`,
+      });
+
+      await doc.loadInfo();
+      stockLocalSheet = doc.sheetsByTitle[STOCK_LOCAL];
+      rows = await stockLocalSheet.getRows();
+      stocks[stockIndex].price = rows[rows.length - 1].PriceEach;
+    }
+    stocks[stockIndex].updated = Date.now();
+  }
+  return stocks;
 }
-// readSheet();
