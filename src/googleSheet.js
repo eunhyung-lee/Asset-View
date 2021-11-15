@@ -78,9 +78,15 @@ export async function getPrice(stocks) {
       await doc.loadInfo();
       stockLocalSheet = doc.sheetsByTitle[STOCK_LOCAL];
       rows = await stockLocalSheet.getRows();
-      stocks[stockIndex].price = rows[rows.length - 1].PriceEach;
+      if (rows[rows.length - 1].PriceEach === "-1") {
+        //ticker 또는 시장 입력 오류로 가격을 불러오지 못할 때 ERROR처리
+        await rows[rows.length - 1].delete();
+        stocks.splice(stockIndex, 1);
+      } else {
+        stocks[stockIndex].price = rows[rows.length - 1].PriceEach;
+        stocks[stockIndex].updated = Date.now();
+      }
     }
-    stocks[stockIndex].updated = Date.now();
   }
   return stocks;
 }

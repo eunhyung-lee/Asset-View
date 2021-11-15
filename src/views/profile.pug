@@ -13,7 +13,7 @@ block content
                 input(name="editLocalStock",type="submit",value=`Edit ${stock.item}`)
                 input(name="deleteLocalStock",type="submit",value=`Delete ${stock.item}`)
             hr
-        input(name="addLocalStock", type="submit", value="stock Add")
+        input(id="addLocalStock",name="addLocalStock", type="button", value="stock Add")
 //- 실시간 Data 모니터링은 AJAX 배워보기
 //- block script
 //-     script.
@@ -22,3 +22,6 @@ block content
 //-         function formFunc(event){
 //-             event.preventDefault();
 //-         }
+block script 
+    script
+        include profilejs.js
