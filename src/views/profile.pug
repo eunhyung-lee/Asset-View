@@ -5,6 +5,9 @@ block content
     form(method="POST", id="form")
         input(name = "update",type="submit", value = "refresh")
         a(href=`${user.id}/delete`) Delete My Profile  &rarr;
+        
+        div#chart-box 
+            div#stock-chart.piechart   
         //- input(name="deleteProfile",type="button",value="Remove My Profile", onclick=`location.href="${user.id}/delete"`)
         each stock in user.localStock 
             h4 #{stock.item} : #{stock.price}원/주, #{stock.amount} 주 보유, total #{stock.price * stock.amount} 
@@ -13,15 +16,19 @@ block content
                 input(name="editLocalStock",type="submit",value=`Edit ${stock.item}`)
                 input(name="deleteLocalStock",type="submit",value=`Delete ${stock.item}`)
             hr
+        if errorMessage 
+            span=errorMessage
         input(id="addLocalStock",name="addLocalStock", type="button", value="stock Add")
 //- 실시간 Data 모니터링은 AJAX 배워보기
-//- block script
-//-     script.
-//-         const form = document.querySelector("#form")
-//-         form.addEventListener("submit", formFunc)
-//-         function formFunc(event){
-//-             event.preventDefault();
-//-         }
+
 block script 
+    script.
+        const test = '#{JSON.stringify(user)}'
+
     script
+        include profileChart.js
         include profilejs.js
+    
+        
+
+        

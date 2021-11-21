@@ -107,7 +107,7 @@ export const postUserAsset = async (req, res) => {
     return res.render("404", { pageTitle: "Error" });
   }
   if (req.body.update) {
-    //refresh click시
+    //refresh click시, /id/update로 빼야됨
     let updatedStock = [];
     updatedStock = await getPrice(user.localStock);
     await User.findByIdAndUpdate(id, { localStock: updatedStock });
@@ -126,15 +126,44 @@ export const postUserAsset = async (req, res) => {
     await User.findByIdAndUpdate(id, {
       localStock: user.localStock,
     });
+    return res.redirect(`/${id}`);
+  } else if (req.body.localStockAdd) {
+    //Local Stock Add Button Click시
+    let localStocks = user.localStock;
 
+    //겹치는거 체크
+    let stockCheck = user.localStock.find((ele) => {
+      if (ele.item === req.body.itemNew || ele.ticker === req.body.tickerNew) {
+        return true;
+      }
+    });
+    if (stockCheck) {
+      return res.render("profile", {
+        pageTitle: "Profile",
+        user,
+        errorMessage: "stock Name or Ticker is taken",
+      });
+    }
+
+    //겹치지 않을 경우
+    localStocks.push({
+      market: req.body.marketNew,
+      item: req.body.itemNew,
+      ticker: req.body.tickerNew,
+      amount: req.body.amountNew,
+    });
+    localStocks = await getPrice(localStocks);
+    await User.findByIdAndUpdate(id, {
+      localStock: user.localStock,
+    });
     return res.redirect(`/${id}`);
   }
 };
 
+//delete profile
 export const userDelete = async (req, res) => {
   //delete button click시
   const { id } = req.params;
-  console.log(id);
   const user = await User.findById(id);
   if (!user) {
     //error 처리

@@ -1,5 +1,4 @@
 const editButton = document.getElementById("addLocalStock");
-const buttonBox = document.getElementById("stock-button-div");
 editButton.addEventListener("click", addLocalStock);
 function addLocalStock() {
   const totalBoxDiv = document.createElement("div");
@@ -10,6 +9,7 @@ function addLocalStock() {
   const nameInput = document.createElement("input");
   const tickerInput = document.createElement("input");
   const amountInput = document.createElement("input");
+  const addButton = document.createElement("input");
   krxLabel.innerText = "krx";
   kosdaqLabel.innerText = "kosdaq";
   //주식 시장 선택
@@ -22,7 +22,7 @@ function addLocalStock() {
   kosdaqInput.name = `marketNew`;
 
   //주식 이름
-  nameInput.name = `LocalNameNew`;
+  nameInput.name = `itemNew`;
   nameInput.placeholder = "주식명 입력";
 
   //주식 티커명
@@ -35,6 +35,10 @@ function addLocalStock() {
 
   totalBoxDiv.style.border = "solid";
 
+  addButton.type = "submit";
+  addButton.value = "Add Local Stock";
+  addButton.name = "localStockAdd";
+
   krxLabel.appendChild(krxInput);
   kosdaqLabel.appendChild(kosdaqInput);
   totalBoxDiv.appendChild(krxLabel);
@@ -42,5 +46,7 @@ function addLocalStock() {
   totalBoxDiv.appendChild(nameInput);
   totalBoxDiv.appendChild(tickerInput);
   totalBoxDiv.appendChild(amountInput);
+  totalBoxDiv.appendChild(addButton);
   editButton.before(totalBoxDiv);
+  editButton.style.display = "none";
 }

@@ -40,10 +40,10 @@ export async function readSheet() {
   netAsset = assetItemRows[0].NetAsset;
   debt = assetItemRows[0].debt;
   stockLocal = [];
-  stockLocal.push(stockLocalRows[0].PriceTotal);
-  stockLocal.push(stockLocalRows[1].PriceTotal);
-  stockLocal.push(stockLocalRows[2].PriceTotal);
-  stockLocal.push(stockLocalRows[3].PriceTotal);
+  stockLocal.push(parseInt(stockLocalRows[0].PriceTotal));
+  stockLocal.push(parseInt(stockLocalRows[1].PriceTotal));
+  stockLocal.push(parseInt(stockLocalRows[2].PriceTotal));
+  stockLocal.push(parseInt(stockLocalRows[3].PriceTotal));
   stockLocal.push(parseFloat(stockOverseaRows[0].PriceTotal) * exchangeRate);
   console.log("update success");
 }
