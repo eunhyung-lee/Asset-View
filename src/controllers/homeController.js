@@ -108,11 +108,13 @@ export const postUserAsset = async (req, res) => {
   }
   if (req.body.update) {
     //refresh click시, /id/update로 빼야됨
+    //update click시
     let updatedStock = [];
     updatedStock = await getPrice(user.localStock);
     await User.findByIdAndUpdate(id, { localStock: updatedStock });
     return res.redirect(`/${id}`);
   } else if (req.body.deleteLocalStock) {
+    //delete local stock click 시
     const stockItem = req.body.deleteLocalStock.split(" ")[1];
     let nth;
     const stockForDelete = user.localStock.find((ele, index) => {
@@ -121,7 +123,6 @@ export const postUserAsset = async (req, res) => {
         return true;
       }
     });
-    //하나 제거
     const newStockArr = user.localStock.splice(nth, 1);
     await User.findByIdAndUpdate(id, {
       localStock: user.localStock,

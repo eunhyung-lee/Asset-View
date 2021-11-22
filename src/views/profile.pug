@@ -1,6 +1,8 @@
 //- user profile
 extends base
-
+block style 
+    style 
+        link(rel="stylesheet", href = "../css/profileStyle.css")
 block content 
     form(method="POST", id="form")
         input(name = "update",type="submit", value = "refresh")
@@ -10,12 +12,14 @@ block content
             div#stock-chart.piechart   
         //- input(name="deleteProfile",type="button",value="Remove My Profile", onclick=`location.href="${user.id}/delete"`)
         each stock in user.localStock 
-            h4 #{stock.item} : #{stock.price}원/주, #{stock.amount} 주 보유, total #{stock.price * stock.amount} 
-            small updated at #{stock.updated}
-            div(style="display:flex")
-                input(name="editLocalStock",type="submit",value=`Edit ${stock.item}`)
-                input(name="deleteLocalStock",type="submit",value=`Delete ${stock.item}`)
-            hr
+            div.each-stock(style="display:flex")
+                div
+                    h4 #{stock.item} : #{stock.price}원/주, #{stock.amount} 주 보유, total #{stock.price * stock.amount} 
+                    small updated at #{stock.updated}
+                div
+                    input(name="editLocalStock",type="submit",value=`Edit ${stock.item}`)
+                    input(name="deleteLocalStock",type="submit",value=`Delete ${stock.item}`)
+            hr(style="margin: 10px 0px 10px 0px")
         if errorMessage 
             span=errorMessage
         input(id="addLocalStock",name="addLocalStock", type="button", value="stock Add")
