@@ -97,7 +97,19 @@ export const getUserAsset = async (req, res) => {
   if (!user) {
     return res.render("404", { pageTitle: "Error" });
   }
-  return res.render("profile", { pageTitle: "Profile", user });
+  let totalAsset = 0;
+  let totalAssetYest = 0;
+  user.localStock.forEach((ele) => {
+    totalAsset += ele.price * ele.amount;
+    totalAssetYest += ele.priceYest * ele.amount;
+  });
+  console.log(totalAsset);
+  return res.render("profile", {
+    pageTitle: "Profile",
+    user,
+    totalAsset,
+    totalAssetYest,
+  });
 };
 export const postUserAsset = async (req, res) => {
   const { id } = req.params;

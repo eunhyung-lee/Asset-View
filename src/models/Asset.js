@@ -7,6 +7,7 @@ const stockSchema = new mongoose.Schema({
   ticker: String,
   amount: Number,
   price: { type: Number, default: -1 },
+  priceYest: { type: Number },
   updated: { type: Date, required: true, default: Date.now },
 });
 const assetSchema = new mongoose.Schema({

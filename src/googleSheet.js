@@ -58,13 +58,17 @@ export async function getPrice(stocks) {
   let stockRowNum = rows.length;
 
   for (stockIndex = 0; stockIndex < stocks.length; stockIndex++) {
+    // 이미 이름이 google sheet에 있나 확인
     for (count = 0; count < rows.length; count++) {
       if (rows[count].Item === stocks[stockIndex].item) {
         stocks[stockIndex].price = rows[count].PriceEach;
+        stocks[stockIndex].priceYest = rows[count].PriceYest;
         break;
       }
     }
+    // 없을 경우
     if (count === rows.length) {
+      // stock 정보를 sheet에 입력
       const newRow = await stockLocalSheet.addRow({
         market: stocks[stockIndex].market,
         Item: stocks[stockIndex].item,
@@ -73,8 +77,12 @@ export async function getPrice(stocks) {
         PriceEach: `=IFERROR(GOOGLEFINANCE(concatenate(A${
           rows.length + 2
         },":",C${rows.length + 2}),"price"),"-1")`,
+        PriceYest: `=IFERROR(GOOGLEFINANCE(concatenate(A${
+          rows.length + 2
+        },":",C${rows.length + 2}),"closeyest"),"-1")`,
       });
 
+      //저장 후 가격 다시 불러오기
       await doc.loadInfo();
       stockLocalSheet = doc.sheetsByTitle[STOCK_LOCAL];
       rows = await stockLocalSheet.getRows();
@@ -84,6 +92,7 @@ export async function getPrice(stocks) {
         stocks.splice(stockIndex, 1);
       } else {
         stocks[stockIndex].price = rows[rows.length - 1].PriceEach;
+        stocks[stockIndex].priceYest = rows[rows.length - 1].PriceYest;
         stocks[stockIndex].updated = Date.now();
       }
     }
